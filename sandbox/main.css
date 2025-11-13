@@ -224,6 +224,7 @@ footer {
 
 .contact-link i {
     font-size: 1.2rem;
+    transition: color 0.3s ease;
 }
 
 /* WhatsApp con color específico */
@@ -244,7 +245,7 @@ footer {
     background: rgba(255, 107, 139, 0.3);
 }
 
-/* ANIMACIÓN ALEATORIA PARA TODOS LOS ICONOS DEL FOOTER */
+/* NUEVA ANIMACIÓN PARA ICONOS CON CAMBIO DE COLOR */
 @keyframes icon-pulse {
     0%, 100% { 
         transform: scale(1);
@@ -268,6 +269,64 @@ footer {
 .social-icons a:nth-child(1) { animation-delay: 0.6s; } /* Facebook */
 .social-icons a:nth-child(2) { animation-delay: 1.8s; } /* Instagram */
 .social-icons a:nth-child(3) { animation-delay: 2.4s; } /* TikTok */
+
+/* CAMBIO DE COLOR DURANTE LA PULSACIÓN - TELÉFONO */
+.contact-link[href*="tel:"] i {
+    animation: tel-color-pulse 3s ease-in-out infinite;
+}
+
+@keyframes tel-color-pulse {
+    0%, 100% { color: white; }
+    50% { color: #2196F3; } /* Azul para teléfono */
+}
+
+/* CAMBIO DE COLOR DURANTE LA PULSACIÓN - WHATSAPP */
+.contact-link[href*="whatsapp"] i {
+    animation: whatsapp-color-pulse 3s ease-in-out infinite;
+}
+
+@keyframes whatsapp-color-pulse {
+    0%, 100% { color: white; }
+    50% { color: #25D366; } /* Verde WhatsApp */
+}
+
+/* CAMBIO DE COLOR DURANTE LA PULSACIÓN - FACEBOOK */
+.social-icons a[title="Facebook"] i {
+    animation: facebook-color-pulse 3s ease-in-out infinite;
+}
+
+@keyframes facebook-color-pulse {
+    0%, 100% { color: white; }
+    50% { color: #1877F2; } /* Azul Facebook */
+}
+
+/* CAMBIO DE COLOR DURANTE LA PULSACIÓN - INSTAGRAM */
+.social-icons a[title="Instagram"] i {
+    animation: instagram-color-pulse 3s ease-in-out infinite;
+}
+
+@keyframes instagram-color-pulse {
+    0%, 100% { color: white; }
+    50% { 
+        color: transparent;
+        background: linear-gradient(45deg, #E1306C, #833AB4);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+}
+
+/* CAMBIO DE COLOR DURANTE LA PULSACIÓN - TIKTOK */
+.social-icons a[title="TikTok"] i {
+    animation: tiktok-color-pulse 3s ease-in-out infinite;
+}
+
+@keyframes tiktok-color-pulse {
+    0%, 100% { color: white; }
+    50% { 
+        color: #FF0050; /* Rojo TikTok */
+        text-shadow: 0 0 5px #000000; /* Sombra negra para contraste */
+    }
+}
 
 .social-icons {
     display: flex;
