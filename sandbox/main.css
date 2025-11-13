@@ -147,7 +147,7 @@ header::before {
 /* WhatsApp Button - Fijo y flotante */
 .whatsapp-button {
     position: fixed;
-    top: 60px;
+    bottom: 80px;
     right: 15px;
     width: 50px;
     height: 50px;
