@@ -74,6 +74,7 @@ header::before {
 /* Categories Grid - Espaciado optimizado */
 .categories {
     padding: 6px 0 15px 0;
+    flex: 1;
 }
 
 .section-title {
@@ -143,10 +144,10 @@ header::before {
     color: #777;
 }
 
-/* WhatsApp Button - Más arriba */
+/* WhatsApp Button - Fijo y flotante */
 .whatsapp-button {
     position: fixed;
-    bottom: 150px;
+    bottom: 20px;
     right: 15px;
     width: 50px;
     height: 50px;
@@ -158,7 +159,7 @@ header::before {
     color: white;
     font-size: 1.5rem;
     box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
-    z-index: 100;
+    z-index: 1000;
     text-decoration: none;
     transition: transform 0.3s ease;
 }
@@ -167,45 +168,51 @@ header::before {
     transform: scale(0.95);
 }
 
-/* Footer - Diseño lado a lado mejorado */
+/* Footer - Diseño vertical alineado a la izquierda */
 footer {
     background: var(--dark);
     color: white;
-    padding: 12px 0 80px 0;
+    padding: 20px 0 40px 0;
     margin-top: auto;
 }
 
 .footer-content {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-start;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .phone-number {
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
 .phone-number a {
     color: white;
     text-decoration: none;
+    font-size: 1.1rem;
 }
 
 .social-icons {
     display: flex;
-    gap: 8px;
+    gap: 12px;
 }
 
 .social-icons a {
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 0.85rem;
+    font-size: 1rem;
     text-decoration: none;
     transition: background 0.3s ease;
 }
@@ -214,38 +221,24 @@ footer {
     background: var(--primary);
 }
 
-/* Animaciones para las tarjetas - CSS ONLY */
-@keyframes card-breathing {
-    0% { 
-        transform: scale(1);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+/* Animaciones mejoradas para las tarjetas */
+@keyframes subtle-float {
+    0%, 100% { 
+        transform: translateY(0);
     }
     50% { 
-        transform: scale(1.05);
-        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-    }
-    100% { 
-        transform: scale(1);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transform: translateY(-3px);
     }
 }
 
 .category-card {
-    animation: card-breathing 2s ease-in-out infinite;
-    animation-play-state: running;
+    animation: subtle-float 3s ease-in-out infinite;
 }
 
-/* Delays predefinidos para cada tarjeta */
-.card-animation-1 { animation-delay: 0.5s; }
-.card-animation-2 { animation-delay: 1s; }
-.card-animation-3 { animation-delay: 1.5s; }
-.card-animation-4 { animation-delay: 2s; }
-.card-animation-5 { animation-delay: 2.5s; }
-.card-animation-6 { animation-delay: 3s; }
-
-/* Pausar animación al interactuar */
-.category-card:active {
-    animation-play-state: paused;
+.category-card:hover {
+    animation: none;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 /* Responsive Adjustments */
@@ -265,6 +258,14 @@ footer {
     
     .tagline {
         font-size: 0.9rem;
+    }
+    
+    .whatsapp-button {
+        bottom: 25px;
+        right: 25px;
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
     }
 }
 
@@ -296,9 +297,8 @@ footer {
         width: 100%;
     }
     
-    .footer-content {
-        flex-direction: row;
-        gap: 0;
+    footer {
+        padding: 20px 0 60px 0;
     }
 }
 
@@ -309,5 +309,11 @@ footer {
     
     .category-icon {
         height: 85px;
+    }
+    
+    .social-icons a {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
     }
 }
