@@ -144,63 +144,54 @@ header::before {
     color: #777;
 }
 
-/* WhatsApp Button - Fijo y flotante */
-.whatsapp-button {
-    position: fixed;
-    bottom: 80px;
-    right: 15px;
-    width: 50px;
-    height: 50px;
-    background-color: #25D366;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
-    z-index: 1000;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-}
-
-.whatsapp-button:active {
-    transform: scale(0.95);
-}
-
-/* Footer - Diseño vertical alineado a la izquierda */
+/* Footer - Nuevo diseño horizontal */
 footer {
     background: var(--dark);
     color: white;
-    padding: 20px 0 40px 0;
+    padding: 25px 0 40px 0;
     margin-top: auto;
 }
 
-.footer-content {
+.footer-contact {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
 }
 
-.contact-info {
+.contact-item {
+    flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    justify-content: center;
 }
 
-.phone-number {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.phone-number a {
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     color: white;
     text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.contact-link:hover {
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.contact-link i {
     font-size: 1.1rem;
 }
 
 .social-icons {
     display: flex;
     gap: 12px;
+    justify-content: center;
 }
 
 .social-icons a {
@@ -219,6 +210,17 @@ footer {
 
 .social-icons a:active {
     background: var(--primary);
+}
+
+/* Copyright */
+.copyright-info {
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    line-height: 1.4;
+    width: 100%;
 }
 
 /* ANIMACIONES MEJORADAS - EFECTO DE RESPIRACIÓN INDIVIDUAL */
@@ -262,17 +264,6 @@ footer {
     transform: scale(0.98);
 }
 
-.copyright-info {
-    text-align: center;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    line-height: 1.4;
-    width: 100%;
-    position: relative;
-}
 /* Responsive Adjustments */
 @media (min-width: 768px) {
     .container {
@@ -290,14 +281,6 @@ footer {
     
     .tagline {
         font-size: 0.9rem;
-    }
-    
-    .whatsapp-button {
-        bottom: 25px;
-        right: 25px;
-        width: 60px;
-        height: 60px;
-        font-size: 1.8rem;
     }
     
     /* Ajustar delays para pantallas más grandes */
@@ -337,6 +320,22 @@ footer {
         width: 100%;
     }
     
+    .footer-contact {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .contact-item {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .social-icons {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
     footer {
         padding: 20px 0 60px 0;
     }
@@ -355,5 +354,10 @@ footer {
         width: 32px;
         height: 32px;
         font-size: 0.9rem;
+    }
+    
+    .contact-link {
+        font-size: 0.85rem;
+        padding: 6px 10px;
     }
 }
