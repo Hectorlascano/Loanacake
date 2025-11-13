@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Tortas | Loana Cakes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6B8B;
+            --secondary: #FFD166;
+            --accent: #6A67CE;
+            --light: #FFF9F2;
+            --dark: #333333;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.2;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header - Diseño mejorado */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 12px 0 8px 0;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        
+        .tagline {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            font-weight: 400;
+            text-align: right;
+            line-height: 1.2;
+        }
+        
+        /* Categories Grid - Espaciado optimizado */
+        .categories {
+            padding: 6px 0 0 0;
+            flex: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 3px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .category-card:active {
+            transform: scale(0.98);
+        }
+        
+        .category-icon {
+            height: 95px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .category-content {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .category-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+        
+        .category-count {
+            font-size: 0.75rem;
+            color: #777;
+        }
+        
+        /* WhatsApp Button - Más arriba */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+            z-index: 100;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .whatsapp-button:active {
+            transform: scale(0.95);
+        }
+        
+        /* Footer - Diseño lado a lado mejorado */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 12px 0 50px 0;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .phone-number {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .phone-number a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .social-icons a {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .social-icons a:active {
+            background: var(--primary);
+        }
+        
+        /* Animaciones para las tarjetas */
+        @keyframes card-breathing {
+            0% { 
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            }
+            50% { 
+                transform: scale(1.015);
+                box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            }
+            100% { 
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            }
+        }
+        
+        .category-card.animated {
+            animation: card-breathing 2s ease-in-out infinite;
+            animation-play-state: running;
+        }
+        
+        .category-card.paused {
+            animation-play-state: paused;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            
+            .brand-name {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .category-icon {
+                height: 85px;
+                font-size: 2.2rem;
+            }
+            
+            .category-content {
+                padding: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+            
+            .brand-name {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                text-align: left;
+                font-size: 0.8rem;
+                width: 100%;
+            }
+            
+            .footer-content {
+                flex-direction: row;
+                gap: 0;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .categories-grid {
+                gap: 6px;
+            }
+            
+            .category-icon {
+                height: 85px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="brand-name">Loana Cakes</div>
+                <div class="tagline">Dulces momentos hechos realidad</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Categorías</h2>
+            
+            <div class="categories-grid">
+                <!-- REEMPLAZAR: Enlaces de Google Fotos -->
+                <a href="https://photos.app.goo.gl/ENLACE_CUMPLEANOS" target="_blank" class="category-card">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #FF9A9E, #FAD0C4);">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <div class="category-content">
+                        <div class="category-title">🎂 Cumpleaños</div>
+                        <div class="category-count">Ver álbum</div>
+                    </div>
+                </a>
+                
+                <a href="https://photos.app.goo.gl/ENLACE_INFANTILES" target="_blank" class="category-card">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #A1C4FD, #C2E9FB);">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <div class="category-content">
+                        <div class="category-title">🧁 Infantiles</div>
+                        <div class="category-count">Ver álbum</div>
+                    </div>
+                </a>
+                
+                <a href="https://photos.app.goo.gl/ENLACE_COMUNION" target="_blank" class="category-card">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #FFECD2, #FCB69F);">
+                        <i class="fas fa-church"></i>
+                    </div>
+                    <div class="category-content">
+                        <div class="category-title">🙏 Comunión</div>
+                        <div class="category-count">Ver álbum</div>
+                    </div>
+                </a>
+                
+                <a href="https://photos.app.goo.gl/ENLACE_HOMBRES" target="_blank" class="category-card">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #84FAB0, #8FD3F4);">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="category-content">
+                        <div class="category-title">🎉 Hombres</div>
+                        <div class="category-count">Ver álbum</div>
+                    </div>
+                </a>
+                
+                <a href="https://photos.app.goo.gl/ENLACE_BODAS" target="_blank" class="category-card">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #D4FC79, #96E6A1);">
+                        <i class="fas fa-ring"></i>
+                    </div>
+                    <div class="category-content">
+                        <div class="category-title">💍 Bodas</div>
+                        <div class="category-count">Ver álbum</div>
+                    </div>
+                </a>
+                
+                <a href="https://photos.app.goo.gl/ENLACE_ESPECIALES" target="_blank" class="category-card">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #FDCBF1, #E6DEE9);">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="category-content">
+                        <div class="category-title">⭐ Especiales</div>
+                        <div class="category-count">Ver álbum</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/584122140347?text=Hola,%20me%20interesan%20sus%20tortas" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer - Diseño lado a lado -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="phone-number">
+                    <a href="tel:04122140347">0412 214 0347</a>
+                </div>
+                <div class="social-icons">
+                    <!-- REEMPLAZAR: Enlaces de redes sociales -->
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Efecto de carga suave para las tarjetas
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.category-card');
+            
+            // Configurar animaciones aleatorias para cada tarjeta
+            cards.forEach((card, index) => {
+                // Delay aleatorio entre 1-4 segundos
+                const randomDelay = Math.random() * 3000 + 1000; // 1000ms a 4000ms
+                
+                // Duración aleatoria entre 1.5s y 2.5s
+                const randomDuration = Math.random() * 1000 + 1500; // 1500ms a 2500ms
+                
+                // Aplicar delay inicial
+                setTimeout(() => {
+                    card.classList.add('animated');
+                    
+                    // Aplicar duración aleatoria
+                    card.style.animationDuration = `${randomDuration}ms`;
+                }, randomDelay);
+                
+                // Pausar animación al tocar
+                card.addEventListener('mousedown', function() {
+                    this.classList.add('paused');
+                });
+                
+                card.addEventListener('touchstart', function() {
+                    this.classList.add('paused');
+                });
+                
+                // Reanudar animación si no se completó el click
+                card.addEventListener('mouseup', function() {
+                    this.classList.remove('paused');
+                });
+                
+                card.addEventListener('touchend', function() {
+                    this.classList.remove('paused');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.classList.remove('paused');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
