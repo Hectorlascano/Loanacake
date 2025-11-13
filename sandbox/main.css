@@ -144,21 +144,24 @@ header::before {
     color: #777;
 }
 
-/* Footer - CORREGIDO: Todos los elementos en misma línea */
+/* Footer - SOLO ICONOS - SIEMPRE EN MISMA LÍNEA */
 footer {
     background: var(--dark);
     color: white;
-    padding: 25px 0 50px 0;
+    padding: 20px 0 50px 0;
     margin-top: auto;
 }
 
 .footer-contact {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     margin-bottom: 25px;
     flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px 5px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .contact-item {
@@ -170,24 +173,43 @@ footer {
 .contact-link {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
     color: white;
     text-decoration: none;
-    font-size: 0.95rem;
-    transition: opacity 0.3s ease;
-    padding: 8px 15px;
-    border-radius: 8px;
+    transition: all 0.3s ease;
+    padding: 10px;
+    border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
-    white-space: nowrap;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
 }
 
 .contact-link:hover {
-    opacity: 0.8;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
 }
 
 .contact-link i {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+}
+
+/* WhatsApp con color específico */
+.contact-link[href*="whatsapp"] {
+    background: rgba(37, 211, 102, 0.2);
+}
+
+.contact-link[href*="whatsapp"]:hover {
+    background: rgba(37, 211, 102, 0.3);
+}
+
+/* Teléfono con color específico */
+.contact-link[href*="tel:"] {
+    background: rgba(255, 107, 139, 0.2);
+}
+
+.contact-link[href*="tel:"]:hover {
+    background: rgba(255, 107, 139, 0.3);
 }
 
 .social-icons {
@@ -198,21 +220,23 @@ footer {
 }
 
 .social-icons a {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-decoration: none;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
-.social-icons a:active {
-    background: var(--primary);
+.social-icons a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
 }
 
 /* Copyright */
@@ -286,6 +310,21 @@ footer {
         font-size: 0.9rem;
     }
     
+    .footer-contact {
+        gap: 20px;
+    }
+    
+    .contact-link,
+    .social-icons a {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .contact-link i,
+    .social-icons a i {
+        font-size: 1.3rem;
+    }
+    
     /* Ajustar delays para pantallas más grandes */
     .category-card:nth-child(1) { animation-delay: 0s; }
     .category-card:nth-child(2) { animation-delay: 0.7s; }
@@ -306,7 +345,7 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .header-content {
         flex-direction: column;
         align-items: flex-start;
@@ -324,28 +363,19 @@ footer {
     }
     
     .footer-contact {
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-    }
-    
-    .contact-item {
-        justify-content: center;
-    }
-    
-    .social-icons {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .footer-contact {
         gap: 12px;
+        padding: 8px 3px;
     }
     
-    .contact-link {
-        font-size: 0.9rem;
-        padding: 6px 12px;
+    .contact-link,
+    .social-icons a {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .contact-link i,
+    .social-icons a i {
+        font-size: 1rem;
     }
     
     footer {
@@ -362,14 +392,36 @@ footer {
         height: 85px;
     }
     
-    .social-icons a {
-        width: 32px;
-        height: 32px;
-        font-size: 0.9rem;
+    .footer-contact {
+        gap: 10px;
     }
     
-    .contact-link {
-        font-size: 0.85rem;
-        padding: 6px 10px;
+    .contact-link,
+    .social-icons a {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .contact-link i,
+    .social-icons a i {
+        font-size: 0.95rem;
+    }
+}
+
+/* Garantizar que siempre esté en una línea */
+@media (max-width: 320px) {
+    .footer-contact {
+        gap: 8px;
+    }
+    
+    .contact-link,
+    .social-icons a {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .contact-link i,
+    .social-icons a i {
+        font-size: 0.9rem;
     }
 }
