@@ -30,11 +30,11 @@ body {
     padding: 0 15px;
 }
 
-/* Header - Diseño mejorado */
+/* Header - Padding optimizado */
 header {
     background: linear-gradient(135deg, var(--primary), var(--accent));
     color: white;
-    padding: 12px 0 8px 0;
+    padding: 15px 0 10px 0;
     box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
@@ -113,6 +113,8 @@ header::before {
     text-decoration: none;
     color: inherit;
     display: block;
+    position: relative;
+    z-index: 1;
 }
 
 .category-card:active {
@@ -144,11 +146,46 @@ header::before {
     color: #777;
 }
 
-/* Footer - SOLO ICONOS - SIEMPRE EN MISMA LÍNEA */
+/* NUEVA ANIMACIÓN PARA TARJETAS - EFECTO DE PULSACIÓN CON SCALE */
+@keyframes card-pulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        z-index: 1;
+    }
+    50% { 
+        transform: scale(1.08);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        z-index: 2;
+    }
+}
+
+.category-card {
+    animation: card-pulse 3s ease-in-out infinite;
+    animation-play-state: running;
+}
+
+/* Delays individuales para efecto de ola */
+.category-card:nth-child(1) { animation-delay: 0s; }
+.category-card:nth-child(2) { animation-delay: 0.5s; }
+.category-card:nth-child(3) { animation-delay: 1s; }
+.category-card:nth-child(4) { animation-delay: 1.5s; }
+.category-card:nth-child(5) { animation-delay: 2s; }
+.category-card:nth-child(6) { animation-delay: 2.5s; }
+
+/* Efecto hover - Pausar animación y hacer zoom más pronunciado */
+.category-card:hover {
+    animation-play-state: paused;
+    transform: scale(1.1);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    z-index: 3;
+}
+
+/* Footer - ESPACIADO OPTIMIZADO */
 footer {
     background: var(--dark);
     color: white;
-    padding: 20px 0 50px 0;
+    padding: 15px 0 40px 0;
     margin-top: auto;
 }
 
@@ -157,10 +194,10 @@ footer {
     justify-content: center;
     align-items: center;
     gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding: 10px 5px;
+    padding: 8px 5px;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -212,6 +249,18 @@ footer {
     background: rgba(255, 107, 139, 0.3);
 }
 
+/* NUEVA ANIMACIÓN PARA ICONOS DE REDES - PULSACIÓN SECUENCIAL */
+@keyframes social-pulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    50% { 
+        transform: scale(1.15);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+}
+
 .social-icons {
     display: flex;
     gap: 12px;
@@ -232,11 +281,18 @@ footer {
     text-decoration: none;
     transition: all 0.3s ease;
     flex-shrink: 0;
+    animation: social-pulse 4s ease-in-out infinite;
 }
+
+/* Delays secuenciales para redes sociales */
+.social-icons a:nth-child(1) { animation-delay: 0s; }
+.social-icons a:nth-child(2) { animation-delay: 1.3s; }
+.social-icons a:nth-child(3) { animation-delay: 2.6s; }
 
 .social-icons a:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.1);
+    animation-play-state: paused;
 }
 
 /* Copyright */
@@ -244,51 +300,10 @@ footer {
     text-align: center;
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.7);
-    padding-top: 20px;
+    padding-top: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     line-height: 1.4;
     width: 100%;
-}
-
-/* ANIMACIONES MEJORADAS - EFECTO DE RESPIRACIÓN INDIVIDUAL */
-@keyframes card-breathing {
-    0% { 
-        transform: scale(1);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    50% { 
-        transform: scale(1.03);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    }
-    100% { 
-        transform: scale(1);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-}
-
-/* Aplicar animación base a todas las tarjetas */
-.category-card {
-    animation: card-breathing 4s ease-in-out infinite;
-    animation-play-state: running;
-}
-
-/* Delays individuales para cada tarjeta - Efecto de ola progresivo */
-.category-card:nth-child(1) { animation-delay: 0s; }
-.category-card:nth-child(2) { animation-delay: 0.6s; }
-.category-card:nth-child(3) { animation-delay: 1.2s; }
-.category-card:nth-child(4) { animation-delay: 1.8s; }
-.category-card:nth-child(5) { animation-delay: 2.4s; }
-.category-card:nth-child(6) { animation-delay: 3s; }
-
-/* Efecto hover - Pausar animación y hacer zoom más pronunciado */
-.category-card:hover {
-    animation-play-state: paused;
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-}
-
-.category-card:active {
-    transform: scale(0.98);
 }
 
 /* Responsive Adjustments */
@@ -299,7 +314,7 @@ footer {
     
     .categories-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+        gap: 12px;
     }
     
     .brand-name {
@@ -327,11 +342,11 @@ footer {
     
     /* Ajustar delays para pantallas más grandes */
     .category-card:nth-child(1) { animation-delay: 0s; }
-    .category-card:nth-child(2) { animation-delay: 0.7s; }
-    .category-card:nth-child(3) { animation-delay: 1.4s; }
+    .category-card:nth-child(2) { animation-delay: 0.6s; }
+    .category-card:nth-child(3) { animation-delay: 1.2s; }
     .category-card:nth-child(4) { animation-delay: 0.3s; }
-    .category-card:nth-child(5) { animation-delay: 1.1s; }
-    .category-card:nth-child(6) { animation-delay: 1.8s; }
+    .category-card:nth-child(5) { animation-delay: 0.9s; }
+    .category-card:nth-child(6) { animation-delay: 1.5s; }
 }
 
 @media (max-height: 700px) {
@@ -342,6 +357,10 @@ footer {
     
     .category-content {
         padding: 8px;
+    }
+    
+    footer {
+        padding: 12px 0 35px 0;
     }
 }
 
@@ -364,7 +383,7 @@ footer {
     
     .footer-contact {
         gap: 12px;
-        padding: 8px 3px;
+        padding: 6px 3px;
     }
     
     .contact-link,
@@ -379,7 +398,7 @@ footer {
     }
     
     footer {
-        padding: 20px 0 60px 0;
+        padding: 12px 0 50px 0;
     }
 }
 
@@ -405,23 +424,5 @@ footer {
     .contact-link i,
     .social-icons a i {
         font-size: 0.95rem;
-    }
-}
-
-/* Garantizar que siempre esté en una línea */
-@media (max-width: 320px) {
-    .footer-contact {
-        gap: 8px;
-    }
-    
-    .contact-link,
-    .social-icons a {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .contact-link i,
-    .social-icons a i {
-        font-size: 0.9rem;
     }
 }
