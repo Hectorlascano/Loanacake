@@ -262,6 +262,14 @@ footer {
     transform: scale(0.98);
 }
 
+.copyright-info {
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 15px;
+    line-height: 1.4;
+    width: 100%;
+}
 /* Responsive Adjustments */
 @media (min-width: 768px) {
     .container {
