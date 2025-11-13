@@ -266,9 +266,12 @@ footer {
     text-align: center;
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.7);
-    margin-top: 15px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     line-height: 1.4;
     width: 100%;
+    position: relative;
 }
 /* Responsive Adjustments */
 @media (min-width: 768px) {
