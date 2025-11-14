@@ -127,6 +127,7 @@ header::before {
     justify-content: center;
     font-size: 2rem; /* Reducido de 2.5rem */
     color: white;
+    position: relative;
 }
 
 .category-content {
@@ -174,6 +175,57 @@ header::before {
     animation-play-state: paused;
     transform: scale(1.06); /* Reducido de 1.1 */
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* ESTILOS PARA CATEGORÍAS EN CONSTRUCCIÓN */
+.category-card.construction {
+    position: relative;
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.category-card.construction .category-icon {
+    position: relative;
+    overflow: hidden;
+}
+
+.construction-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255, 107, 139, 0.8), rgba(106, 103, 206, 0.8));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transform: rotate(-15deg);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    animation: construction-shimmer 2s ease-in-out infinite alternate;
+}
+
+@keyframes construction-shimmer {
+    0% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0.9;
+    }
+}
+
+/* Desactivar animaciones para categorías en construcción */
+.category-card.construction {
+    animation: none;
+}
+
+.category-card.construction:hover {
+    transform: none;
+    box-shadow: var(--shadow);
 }
 
 /* Footer - ESPACIADO OPTIMIZADO */
