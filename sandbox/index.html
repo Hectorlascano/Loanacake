@@ -28,7 +28,7 @@
             
             <div class="categories-grid">
                 <!-- TODAS LAS TORTAS -->
-                <a href="https://photos.app.goo.gl/SagY9ygCzqurWguTA" target="_blank" class="category-card">
+                <a href="https://photos.app.goo.gl/SagY9ygCzqurWguTA" target="_blank" class="category-card" data-album="SagY9ygCzqurWguTA">
                     <div class="category-icon" style="background: linear-gradient(135deg, #FF9A9E, #FAD0C4);">
                         <i class="fas fa-images"></i>
                     </div>
@@ -39,7 +39,7 @@
                 </a>
                 
                 <!-- MINI TORTAS -->
-                <a href="https://photos.app.goo.gl/6rssP4EknfKWAzY39" target="_blank" class="category-card">
+                <a href="https://photos.app.goo.gl/6rssP4EknfKWAzY39" target="_blank" class="category-card" data-album="6rssP4EknfKWAzY39">
                     <div class="category-icon" style="background: linear-gradient(135deg, #A1C4FD, #C2E9FB);">
                         <i class="fas fa-cookie-bite"></i>
                     </div>
@@ -53,7 +53,7 @@
                 <a href="#" class="category-card construction">
                     <div class="category-icon" style="background: linear-gradient(135deg, #FFECD2, #FCB69F);">
                         <i class="fas fa-birthday-cake"></i>
-                        <div class="construction-overlay">En Construcción</div>
+                        <div class="construction-overlay">Próximamente</div>
                     </div>
                     <div class="category-content">
                         <div class="category-title">🎂 Cumpleaños</div>
@@ -65,7 +65,7 @@
                 <a href="#" class="category-card construction">
                     <div class="category-icon" style="background: linear-gradient(135deg, #84FAB0, #8FD3F4);">
                         <i class="fas fa-beer"></i>
-                        <div class="construction-overlay">En Construcción</div>
+                        <div class="construction-overlay">Próximamente</div>
                     </div>
                     <div class="category-content">
                         <div class="category-title">🎯 Hombres</div>
@@ -77,7 +77,7 @@
                 <a href="#" class="category-card construction">
                     <div class="category-icon" style="background: linear-gradient(135deg, #D4FC79, #96E6A1);">
                         <i class="fas fa-ring"></i>
-                        <div class="construction-overlay">En Construcción</div>
+                        <div class="construction-overlay">Próximamente</div>
                     </div>
                     <div class="category-content">
                         <div class="category-title">💍 Bodas</div>
@@ -89,7 +89,7 @@
                 <a href="#" class="category-card construction">
                     <div class="category-icon" style="background: linear-gradient(135deg, #FDCBF1, #E6DEE9);">
                         <i class="fas fa-star"></i>
-                        <div class="construction-overlay">En Construcción</div>
+                        <div class="construction-overlay">Próximamente</div>
                     </div>
                     <div class="category-content">
                         <div class="category-title">⭐ Especiales</div>
@@ -99,6 +99,19 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal para Álbumes -->
+    <div id="albumModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="iframe-container">
+                <iframe id="albumFrame" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer - SOLO ICONOS -->
     <footer>
@@ -132,5 +145,7 @@
             </div>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
