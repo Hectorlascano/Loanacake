@@ -11,13 +11,12 @@
     <link rel="shortcut icon" href="https://i.ibb.co/pvJj5g6X/loanacake-logo.jpg">
 
     <!-- Meta Tags SEO -->
-    <meta name="description" content="Loana Cakes - Tortas en Barquisimeto. Dulces momentos hechos realidad con tortas de cumpleaños, bodas y eventos especiales.">
-    <meta name="keywords" content="tortas Barquisimeto, pasteles Barquisimeto, repostería Barquisimeto, tortas personalizadas Barquisimeto, postres Barquisimeto, tortas de cumpleaños, tortas para bodas">
+    <meta name="description" content="Loana Cakes - Tortas personalizadas en Barquisimeto. Tortas de cumpleaños, bodas, eventos especiales y mini tortas. WhatsApp: 0412-2140347 - Envíos a domicilio.">    <meta name="keywords" content="tortas Barquisimeto, pasteles Barquisimeto, repostería Barquisimeto, tortas personalizadas Barquisimeto, postres Barquisimeto, tortas de cumpleaños, tortas para bodas">
     <meta name="author" content="Loana Cakes">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Loana Cakes | Tortas en Barquisimeto">
-    <meta property="og:description" content="Postres y repostería creativa.">
+    <meta property="og:title" content="Loana Cakes | Tortas Personalizadas Barquisimeto">
+    <meta property="og:description" content="🎂 Tortas de cumpleaños, bodas y eventos en Barquisimeto. Mini tortas personalizadas. Delivery disponible. ¡Contáctanos!">
     <meta property="og:image" content="https://i.ibb.co/pvJj5g6X/loanacake-logo.jpg">
     <meta property="og:url" content="https://loanacake.com">
     <meta property="og:type" content="website">
@@ -27,11 +26,104 @@
     <meta name="twitter:title" content="Loana Cakes | Tortas en Barquisimeto">
     <meta name="twitter:description" content="Postres y repostería creativa en Barquisimeto. Dulces momentos hechos realidad.">
     <meta name="twitter:image" content="https://i.ibb.co/pvJj5g6X/loanacake-logo.jpg">
+
+    <!-- Preload y Preconnect CRÍTICOS para velocidad -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://i.ibb.co">
+    
+    <!-- Preload de recursos esenciales -->
+    <link rel="preload" href="main.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- CSS Crítico Inline - Lo que se ve INMEDIATAMENTE -->
+    <style>
+        /* Estilos críticos para mostrar contenido INMEDIATAMENTE */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFF9F2;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            opacity: 1 !important;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #FF6B8B, #6A67CE);
+            color: white;
+            padding: 15px 0 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
+        .brand-name {
+            font-family: Georgia, serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        
+        .tagline {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            font-weight: 400;
+            text-align: right;
+            line-height: 1.2;
+        }
+        
+        /* Asegurar que el contenido sea visible inmediatamente */
+        .categories, footer {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+
+    <!-- Cargar el resto de forma no bloqueante -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="main.css" media="print" onload="this.media='all'">
+
+    <!-- Fallback si JavaScript está deshabilitado -->
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="main.css">
+    </noscript>
+      
+    <!-- Structured Data para SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Bakery",
+      "name": "Loana Cakes",
+      "description": "Tortas personalizadas en Barquisimeto para cumpleaños, bodas y eventos especiales",
+      "url": "https://loanacake.com",
+      "telephone": "+584122140347",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Barquisimeto",
+        "addressRegion": "Lara",
+        "addressCountry": "VE"
+      },
+      "openingHours": "Mo-Su 09:00-18:00",
+      "servesCuisine": "Repostería Creativa"
+    }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -43,6 +135,16 @@
             </div>
         </div>
     </header>
+
+    <!-- NUEVO: Texto SEO para posicionamiento -->
+    <section class="intro-seo">
+        <div class="container">
+            <h1>Tortas Personalizadas en Barquisimeto - Loana Cakes</h1>
+            <p>Creamos <strong>tortas personalizadas en Barquisimeto</strong> para cumpleaños, bodas y eventos especiales. 
+               Disfruta de nuestras <strong>mini tortas</strong> y repostería creativa con diseños únicos. 
+               Servicio de delivery disponible en toda Barquisimeto.</p>
+        </div>
+    </section>
 
     <!-- Categories Section -->
     <section class="categories">
@@ -143,9 +245,7 @@
                 
                 <!-- Redes Sociales - Solo iconos -->
                 <div class="social-icons">
-                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://www.instagram.com/loanacake" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
             
