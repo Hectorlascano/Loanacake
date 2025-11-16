@@ -567,3 +567,46 @@ footer {
         font-size: 0.95rem;
     }
 }
+/* === NUEVO: Estilos para texto SEO === */
+.intro-seo {
+    background: linear-gradient(135deg, #FFF9F2, #FFEEDD);
+    padding: 20px 0;
+    border-bottom: 1px solid #FFD166;
+}
+
+.intro-seo h1 {
+    font-size: 1.4rem;
+    color: #6A67CE;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.intro-seo p {
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive para texto SEO */
+@media (max-width: 768px) {
+    .intro-seo h1 {
+        font-size: 1.2rem;
+    }
+    
+    .intro-seo p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-seo {
+        padding: 15px 0;
+    }
+    
+    .intro-seo h1 {
+        font-size: 1.1rem;
+    }
+}
