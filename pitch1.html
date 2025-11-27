@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conectando Oportunidades</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #ffffff;
+            color: #333333;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+        }
+        
+        .presentation-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .slide {
+            width: 100%;
+            height: 100%;
+            padding: 10px 15px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .slide.active {
+            display: flex;
+        }
+        
+        .content {
+            width: 100%;
+            max-width: 95%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        /* TIPOGRAFÍA GRANDE */
+        h1 {
+            font-size: 3rem;
+            color: #00D4FF;
+            font-weight: bold;
+            line-height: 1.1;
+        }
+        
+        h2 {
+            font-size: 2.4rem;
+            color: #2c3e50;
+            font-weight: 600;
+            line-height: 1.1;
+        }
+        
+        p {
+            font-size: 1.5rem;
+            color: #444444;
+            line-height: 1.3;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #00D4FF, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+        
+        /* Estilos de secciones */
+        .problem, .solution, .result {
+            border-left: 6px solid;
+            padding-left: 15px;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .problem { border-left-color: #FF6B6B; }
+        .solution { border-left-color: #4ECDC4; }
+        .result { border-left-color: #00D4FF; }
+        
+        /* Elementos gráficos */
+        .graphic {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #00D4FF, #4ECDC4);
+            border-radius: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .contact {
+            font-size: 1.3rem;
+            color: #666666;
+        }
+        
+        /* Navegación con flechas laterales */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            height: 80%;
+            z-index: 100;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-arrow:hover {
+            opacity: 0.6;
+        }
+        
+        .nav-arrow.prev {
+            left: 0;
+            justify-content: flex-start;
+            padding-left: 10px;
+        }
+        
+        .nav-arrow.next {
+            right: 0;
+            justify-content: flex-end;
+            padding-right: 10px;
+        }
+        
+        .arrow-icon {
+            font-size: 3rem;
+            color: #00D4FF;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .nav-arrow:hover .arrow-icon {
+            transform: scale(1.2);
+        }
+        
+        .nav-arrow.hidden {
+            display: none;
+        }
+        
+        /* Indicador de progreso */
+        .progress-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            z-index: 1000;
+        }
+        
+        /* Puntos de navegación inferior */
+        .dots-container {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .dot.active {
+            background: #00D4FF;
+            transform: scale(1.2);
+        }
+        
+        /* Efectos de transición */
+        .slide {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Instrucciones */
+        .instructions {
+            font-size: 1rem;
+            color: #999;
+            margin-top: 10px;
+        }
+        
+        /* ESTILOS ESPECÍFICOS PARA LA ÚLTIMA DIAPOSITIVA */
+        #slide7 .content {
+            gap: 15px;
+        }
+        
+        #slide7 h2 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+        
+        #slide7 .result {
+            border-left: 4px solid #00D4FF;
+            padding-left: 12px;
+        }
+        
+        #slide7 .result p {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        
+        #slide7 .graphic {
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+            margin: 5px 0;
+        }
+        
+        #slide7 .contact {
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        /* Página en blanco final */
+        #slide8 {
+            background: linear-gradient(135deg, #00D4FF, #4ECDC4);
+            color: white;
+        }
+        
+        #slide8 .content {
+            gap: 15px;
+        }
+        
+        #slide8 h2 {
+            font-size: 2.2rem;
+            color: white;
+        }
+        
+        #slide8 p {
+            font-size: 1.4rem;
+            color: white;
+        }
+
+        /* Scroll suave para contenido extenso */
+        .scrollable {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding-right: 5px;
+            width: 100%;
+        }
+        
+        .scrollable::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .scrollable::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 2px;
+        }
+        
+        .scrollable::-webkit-scrollbar-thumb {
+            background: #00D4FF;
+            border-radius: 2px;
+        }
+
+        /* Responsive para pantallas muy pequeñas */
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 2.6rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1.3rem;
+            }
+            
+            .graphic {
+                width: 80px;
+                height: 80px;
+                font-size: 2.2rem;
+            }
+            
+            #slide7 h2 {
+                font-size: 1.8rem;
+            }
+            
+            #slide7 .result p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Indicador de progreso -->
+    <div class="progress-indicator" id="progressIndicator">1/8</div>
+    
+    <!-- Flechas de navegación -->
+    <div class="nav-arrow prev" id="prevArrow">
+        <div class="arrow-icon">‹</div>
+    </div>
+    
+    <div class="nav-arrow next" id="nextArrow">
+        <div class="arrow-icon">›</div>
+    </div>
+    
+    <!-- Puntos de navegación -->
+    <div class="dots-container" id="dotsContainer"></div>
+    
+    <div class="presentation-container">
+        <!-- Diapositiva 1: Portada -->
+        <div class="slide active" id="slide1">
+            <div class="content">
+                <div class="graphic">CO</div>
+                <h1>Conectando Oportunidades</h1>
+                <p style="font-size: 1.6rem; color: #666;">Transformando el comercio en Venezuela</p>
+                <p class="instructions">Toca los lados de la pantalla para avanzar</p>
+            </div>
+        </div>
+
+        <!-- Diapositiva 2: El Problema -->
+        <div class="slide" id="slide2">
+            <div class="content scrollable">
+                <h2>El Problema</h2>
+                <div class="problem">
+                    <p>Ves tu mercancía almacenada sin rotación y artículos que no se venden, sintiendo la presión de que abrir nuevos locales es tu única opción para incrementar ventas.</p>
+                    <p>Esto significa aumentar tu estructura de gastos fijos <span class="highlight">sin ninguna garantía de éxito</span>, mientras tu inventario permanece estático.</p>
+                </div>
+                <div class="graphic">!</div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 3: El Problema Ampliado -->
+        <div class="slide" id="slide3">
+            <div class="content scrollable">
+                <h2>La Realidad Actual</h2>
+                <div class="problem">
+                    <p>Los importadores y distribuidores tienen mercancía que necesita venderse, pero sus locales actuales no generan el crecimiento deseado.</p>
+                    <p>Abrir tiendas en línea tampoco garantiza más ventas, ya que requiere trabajo de promoción constante y los clientes aún muestran resistencia a compras a distancia.</p>
+                </div>
+                <div class="graphic">📊</div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 4: La Solución -->
+        <div class="slide" id="slide4">
+            <div class="content scrollable">
+                <h2>Nuestra Solución</h2>
+                <div class="solution">
+                    <p>Hemos creado una <span class="highlight">plataforma de ventas en línea</span> con un sistema de referidos y vendedores comisionistas que genera mayores tasas de conversión.</p>
+                    <p>Tus productos obtienen mayor exposición y rotación <span class="highlight">sin aumentar tus gastos fijos</span>.</p>
+                </div>
+                <div class="graphic">💡</div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 5: Cómo Funciona -->
+        <div class="slide" id="slide5">
+            <div class="content scrollable">
+                <h2>Cómo Funciona</h2>
+                <div class="solution">
+                    <p>Poner tus productos en nuestra tienda genera nuevas ventas a través de una red de vendedores que trabajan por comisión.</p>
+                    <p>La fricción de compras a distancia se reduce porque una <span class="highlight">persona física está presente</span> asesorando y cerrando cada venta.</p>
+                </div>
+                <div class="graphic">🔄</div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 6: El Resultado -->
+        <div class="slide" id="slide6">
+            <div class="content scrollable">
+                <h2>El Resultado</h2>
+                <div class="result">
+                    <p>Experimentarás la <span class="highlight">tranquilidad</span> de ver tu inventario moviéndose constantemente, con ventas crecientes en todo el país.</p>
+                    <p>Sin la necesidad de invertir en nuevos locales físicos, <span class="highlight">pagando solo comisiones sobre ventas concretadas</span>.</p>
+                </div>
+                <div class="graphic">🎯</div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 7: Oportunidad de Inversión -->
+        <div class="slide" id="slide7">
+            <div class="content">
+                <h2>Oportunidad Única</h2>
+                <div class="result">
+                    <p>Buscamos <span class="highlight">inversionistas visionarios</span> para desarrollar esta plataforma.</p>
+                    <p>Únete a la revolución del comercio digital venezolano.</p>
+                </div>
+                <div class="graphic">🚀</div>
+                <div class="contact">
+                    <p>¿Listo para conversar?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 8: Página en blanco final -->
+        <div class="slide" id="slide8">
+            <div class="content">
+                <h2>¡Gracias!</h2>
+                <p>Presentación completa</p>
+                <div class="graphic" style="background: rgba(255,255,255,0.2);">✓</div>
+                <p class="instructions">Fin de la presentación</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevArrow = document.getElementById('prevArrow');
+            const nextArrow = document.getElementById('nextArrow');
+            const progressIndicator = document.getElementById('progressIndicator');
+            const dotsContainer = document.getElementById('dotsContainer');
+            
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            
+            // Crear puntos de navegación
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+            
+            function goToSlide(index) {
+                if (index < 0 || index >= totalSlides) return;
+                
+                slides.forEach(slide => slide.classList.remove('active', 'prev'));
+                currentSlide = index;
+                slides[currentSlide].classList.add('active');
+                updateIndicators();
+                updateNavigation();
+            }
+            
+            function updateIndicators() {
+                progressIndicator.textContent = `${currentSlide + 1}/${totalSlides}`;
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            function updateNavigation() {
+                prevArrow.classList.toggle('hidden', currentSlide === 0);
+                nextArrow.classList.toggle('hidden', currentSlide === totalSlides - 1);
+            }
+            
+            prevArrow.addEventListener('click', () => currentSlide > 0 && goToSlide(currentSlide - 1));
+            nextArrow.addEventListener('click', () => currentSlide < totalSlides - 1 && goToSlide(currentSlide + 1));
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prevArrow.click();
+                else if (e.key === 'ArrowRight' || e.key === ' ') nextArrow.click();
+            });
+            
+            document.addEventListener('click', (e) => {
+                const screenWidth = window.innerWidth;
+                const clickX = e.clientX;
+                if (clickX < screenWidth / 2) prevArrow.click();
+                else nextArrow.click();
+            });
+
+            // Navegación táctil con swipe
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            document.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    // Swipe izquierda - siguiente
+                    nextArrow.click();
+                } else if (touchEndX > touchStartX + swipeThreshold) {
+                    // Swipe derecha - anterior
+                    prevArrow.click();
+                }
+            }
+            
+            // Inicializar
+            updateIndicators();
+            updateNavigation();
+        });
+    </script>
+</body>
+</html>
