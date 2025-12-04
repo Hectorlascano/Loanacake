@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Tienda OpenCart con Afiliados</title>
+    <style>
+        @page {
+            size: letter;
+            margin: 5mm;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: #333;
+            padding: 2mm;
+            background-color: #fff;
+        }
+        
+        .page-break {
+            page-break-before: always;
+            margin-top: 5mm;
+        }
+        
+        .avoid-break {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        
+        .container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3mm;
+            margin-bottom: 4mm;
+        }
+        
+        .col-2 {
+            flex: 1 1 calc(50% - 3mm);
+            min-width: 0;
+        }
+        
+        .col-3 {
+            flex: 1 1 calc(33.333% - 3mm);
+            min-width: 0;
+        }
+        
+        .col-full {
+            flex: 1 1 100%;
+        }
+        
+        h1 {
+            font-size: 14pt;
+            margin-bottom: 4mm;
+            color: #2c3e50;
+            border-bottom: 1px solid #3498db;
+            padding-bottom: 1mm;
+            page-break-after: avoid;
+        }
+        
+        h2 {
+            font-size: 12pt;
+            margin: 3mm 0 2mm 0;
+            color: #34495e;
+            page-break-after: avoid;
+        }
+        
+        h3 {
+            font-size: 11pt;
+            margin: 2mm 0 1mm 0;
+            color: #2c3e50;
+            page-break-after: avoid;
+        }
+        
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            padding: 3mm;
+            background-color: #f9f9f9;
+            height: fit-content;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin: 2mm 0;
+        }
+        
+        th {
+            background-color: #2c3e50;
+            color: white;
+            text-align: left;
+            padding: 1.5mm 2mm;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 1.5mm 2mm;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .priority-high {
+            background-color: #ffebee;
+            border-left: 2px solid #f44336;
+        }
+        
+        .priority-medium {
+            background-color: #fff3e0;
+            border-left: 2px solid #ff9800;
+        }
+        
+        .priority-low {
+            background-color: #e8f5e9;
+            border-left: 2px solid #4caf50;
+        }
+        
+        .kpi-box {
+            border: 1px solid #3498db;
+            background-color: #ebf5fb;
+            padding: 2mm;
+            margin: 1mm 0;
+            border-radius: 2px;
+        }
+        
+        .phase-box {
+            border-left: 3px solid #9b59b6;
+            padding-left: 2mm;
+            margin: 2mm 0;
+        }
+        
+        .risk-box {
+            border: 1px solid #e74c3c;
+            background-color: #fdedec;
+            padding: 2mm;
+            margin: 1mm 0;
+            border-radius: 2px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 1mm 0;
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 2mm;
+            margin-top: 0.5mm;
+        }
+        
+        .diagram-container {
+            background-color: #f5f7fa;
+            padding: 3mm;
+            border-radius: 2px;
+            border: 1px solid #bdc3c7;
+            font-family: 'Courier New', monospace;
+            font-size: 9pt;
+            line-height: 1.3;
+            white-space: pre-line;
+            overflow: hidden;
+        }
+        
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2mm;
+            font-size: 9pt;
+        }
+        
+        .stack-category {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1mm;
+        }
+        
+        .footer-note {
+            font-size: 8pt;
+            color: #7f8c8d;
+            text-align: center;
+            margin-top: 5mm;
+            border-top: 1px dashed #ddd;
+            padding-top: 2mm;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-right {
+            text-align: right;
+        }
+        
+        .mb-2 {
+            margin-bottom: 2mm;
+        }
+        
+        .mt-2 {
+            margin-top: 2mm;
+        }
+        
+        .total-row {
+            font-weight: bold;
+            background-color: #e3f2fd !important;
+        }
+        
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container col-full">
+        <h1>📋 PROYECTO TIENDA OPENCART CON SISTEMA DE AFILIADOS</h1>
+        <p><strong>Versión del documento:</strong> 1.0 | <strong>Fecha:</strong> <span id="current-date"></span></p>
+        <p><strong>Objetivo:</strong> Implementar plataforma de ecommerce con sistema de afiliados nativo, adaptada al mercado venezolano con métodos de pago locales, operativa en 30 días.</p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="container avoid-break">
+        <div class="col-2">
+            <h2>🎯 Diagrama de Flujo del Proceso</h2>
+            <div class="diagram-container avoid-break">
+Cliente Final
+  ↓
+Visita Tienda mediante enlace afiliado
+  ↓
+Realiza compra → Sistema registra pedido
+  ↓
+Notificaciones automáticas:
+  • Administrador
+  • Afiliado correspondiente
+  ↓
+Cliente selecciona método de pago:
+  • Pago Móvil
+  • Zelle
+  • Binance
+  ↓
+↓
+SISTEMA DE VALIDACIÓN
+  ↓
+┌─────────────────────┐
+│   Pago Verificado   │  →  Pedido marcado PAGADO
+└─────────────────────┘
+          ↓
+    Proceso Automático:
+    1. Generar etiqueta envío
+    2. Calcular comisión afiliado
+    3. Actualizar inventario
+          ↓
+    Notificaciones simultáneas:
+    • Cliente: confirmación
+    • Afiliado: comisión pendiente
+    • Almacén: preparar pedido
+          ↓
+    Entrega producto
+          ↓
+    Cliente confirma recepción
+          ↓
+    Liberar comisión afiliado
+    (después de 15 días)
+            </div>
+        </div>
+        
+        <div class="col-2">
+            <h2>💰 Plan de Inversión - Año 1</h2>
+            <div class="card">
+                <h3>INVERSIÓN INICIAL (Mes 1)</h3>
+                <table>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Costo</th>
+                        <th>Frecuencia</th>
+                    </tr>
+                    <tr class="priority-high">
+                        <td>Dominio (.com/.com.ve)</td>
+                        <td>$15</td>
+                        <td>Anual</td>
+                    </tr>
+                    <tr class="priority-high">
+                        <td>VPS Básico (2GB RAM, 50GB SSD)</td>
+                        <td>$18/mes</td>
+                        <td>Mensual</td>
+                    </tr>
+                    <tr class="priority-medium">
+                        <td>SSL Premium (Sectigo)</td>
+                        <td>$12</td>
+                        <td>Anual</td>
+                    </tr>
+                    <tr class="priority-medium">
+                        <td>Tema OpenCart (Journal 3)</td>
+                        <td>$59</td>
+                        <td>Único</td>
+                    </tr>
+                    <tr class="priority-low">
+                        <td>Impresora Térmica Zebra</td>
+                        <td>$220</td>
+                        <td>Único</td>
+                    </tr>
+                    <tr class="priority-high">
+                        <td>Desarrollo Script Validación</td>
+                        <td>$300</td>
+                        <td>Único</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td><strong>TOTAL INVERSIÓN INICIAL</strong></td>
+                        <td colspan="2"><strong>$629 (primer mes)</strong></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="card mt-2">
+                <h3>GASTOS OPERATIVOS MENSUALES</h3>
+                <table>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Costo Mensual</th>
+                    </tr>
+                    <tr>
+                        <td>Hosting VPS</td>
+                        <td>$18</td>
+                    </tr>
+                    <tr>
+                        <td>Backup Cloud</td>
+                        <td>$5</td>
+                    </tr>
+                    <tr>
+                        <td>Email Corporativo (5 cuentas)</td>
+                        <td>$3</td>
+                    </tr>
+                    <tr>
+                        <td>Soporte Técnico (5 horas/mes)</td>
+                        <td>$40</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td><strong>SUB-TOTAL FIJO</strong></td>
+                        <td><strong>$66/mes</strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="container avoid-break">
+        <div class="col-2">
+            <h2>📅 Cronograma de Implementación</h2>
+            
+            <div class="phase-box">
+                <h3>FASE 1: PREPARACIÓN (Semana 1)</h3>
+                <p><strong>Día 1-2:</strong> Compra dominio + configuración VPS</p>
+                <p><strong>Día 3-4:</strong> Instalación OpenCart + tema + SSL</p>
+                <p><strong>Día 5-7:</strong> Desarrollo script validación pagos</p>
+            </div>
+            
+            <div class="phase-box">
+                <h3>FASE 2: CONFIGURACIÓN (Semana 2)</h3>
+                <p><strong>Día 8-10:</strong> Carga productos + categorías</p>
+                <p><strong>Día 11-12:</strong> Sistema afiliados + comisiones</p>
+                <p><strong>Día 13-14:</strong> Métodos pago + pruebas iniciales</p>
+            </div>
+            
+            <div class="phase-box">
+                <h3>FASE 3: PRUEBAS (Semana 3)</h3>
+                <p><strong>Día 15-18:</strong> Testing con 5 usuarios reales</p>
+                <p><strong>Día 19-20:</strong> Corrección errores + optimización</p>
+                <p><strong>Día 21:</strong> Backup final pre-lanzamiento</p>
+            </div>
+            
+            <div class="phase-box">
+                <h3>FASE 4: LANZAMIENTO (Semana 4)</h3>
+                <p><strong>Día 22:</strong> Lanzamiento controlado (beta)</p>
+                <p><strong>Día 23-25:</strong> Monitoreo 24/7 activo</p>
+                <p><strong>Día 26-28:</strong> Ajustes post-lanzamiento</p>
+                <p><strong>Día 29-30:</strong> Onboarding primeros afiliados</p>
+            </div>
+        </div>
+        
+        <div class="col-2">
+            <h2>🎯 KPI's y Métricas de Éxito</h2>
+            
+            <div class="kpi-box">
+                <h3>MES 1-3 (ESTABILIZACIÓN)</h3>
+                <div class="checklist-item"><input type="checkbox"> Uptime 99.5% del sitio</div>
+                <div class="checklist-item"><input type="checkbox"> Tiempo carga < 3 segundos</div>
+                <div class="checklist-item"><input type="checkbox"> 10-20 afiliados activos</div>
+                <div class="checklist-item"><input type="checkbox"> 15-30 órdenes/mes procesadas</div>
+            </div>
+            
+            <div class="kpi-box">
+                <h3>MES 4-6 (CRECIMIENTO)</h3>
+                <div class="checklist-item"><input type="checkbox"> 50+ afiliados activos</div>
+                <div class="checklist-item"><input type="checkbox"> 50-100 órdenes/mes</div>
+                <div class="checklist-item"><input type="checkbox"> Tasa conversión > 1.5%</div>
+                <div class="checklist-item"><input type="checkbox"> Comisiones pagadas puntualmente</div>
+            </div>
+            
+            <div class="kpi-box">
+                <h3>MES 7-12 (ESCALAMIENTO)</h3>
+                <div class="checklist-item"><input type="checkbox"> 200+ afiliados registrados</div>
+                <div class="checklist-item"><input type="checkbox"> 150+ órdenes/mes</div>
+                <div class="checklist-item"><input type="checkbox"> ROI positivo (inversión recuperada)</div>
+                <div class="checklist-item"><input type="checkbox"> Automatización 80% procesos</div>
+            </div>
+            
+            <h3 class="mt-2">📊 Presupuesto Mínimo Viable</h3>
+            <div class="card">
+                <p><strong>Trimestre 1:</strong> $800 - $1,000 total</p>
+                <p><strong>Mensualidad base:</strong> $66 - $316 variable</p>
+                <p><strong>Recomendación:</strong> Inversión completa en infraestructura estable en mes 1</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="container avoid-break">
+        <div class="col-2">
+            <h2>⚠️ Plan de Contingencia y Riesgos</h2>
+            
+            <div class="risk-box">
+                <h3>RIESGO 1: Validación Manual de Pagos</h3>
+                <p><strong>Mitigación:</strong> Script semi-automático + límite diario de $500 por cliente hasta mes 3</p>
+            </div>
+            
+            <div class="risk-box">
+                <h3>RIESGO 2: Sobreventa de Inventario</h3>
+                <p><strong>Mitigación:</strong> Sistema de reservas + notificación automática cuando stock < 10 unidades</p>
+            </div>
+            
+            <div class="risk-box">
+                <h3>RIESGO 3: Fraude de Afiliados</h3>
+                <p><strong>Mitigación:</strong></p>
+                <ul>
+                    <li>Período gracia 30 días para primera comisión</li>
+                    <li>Sistema de reputación con niveles</li>
+                    <li>Verificación KYC básica para comisiones > $100</li>
+                </ul>
+            </div>
+            
+            <div class="risk-box">
+                <h3>RIESGO 4: Caída del Servidor</h3>
+                <p><strong>Mitigación:</strong></p>
+                <ul>
+                    <li>Backup diario automático</li>
+                    <li>Plan recuperación 4 horas máximo</li>
+                    <li>Monitoreo 24/7 con alertas Telegram</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-2">
+            <h2>🛠️ Stack Tecnológico</h2>
+            <div class="stack-grid">
+                <div>
+                    <div class="stack-category">FRONTEND</div>
+                    <p>• OpenCart 4.0+</p>
+                    <p>• Tema: Journal 3</p>
+                    <p>• CDN: Cloudflare</p>
+                </div>
+                
+                <div>
+                    <div class="stack-category">BACKEND</div>
+                    <p>• VPS: 2GB RAM, 1 vCPU</p>
+                    <p>• SO: Ubuntu 22.04 LTS</p>
+                    <p>• Web: Nginx + PHP 8.1</p>
+                    <p>• DB: MySQL 8.0</p>
+                </div>
+                
+                <div>
+                    <div class="stack-category">SEGURIDAD</div>
+                    <p>• SSL: Sectigo</p>
+                    <p>• Firewall: ConfigServer</p>
+                    <p>• Backup: Acronis</p>
+                </div>
+                
+                <div>
+                    <div class="stack-category">HERRAMIENTAS</div>
+                    <p>• Monitoreo: UptimeRobot</p>
+                    <p>• Comunicación: Telegram Bots</p>
+                    <p>• Soporte: Ticket System</p>
+                </div>
+            </div>
+            
+            <h3 class="mt-2">📞 Estructura de Soporte</h3>
+            <table>
+                <tr>
+                    <th>Nivel</th>
+                    <th>Horario</th>
+                    <th>Respuesta</th>
+                </tr>
+                <tr>
+                    <td><strong>NIVEL 1</strong><br>Soporte Básico</td>
+                    <td>8am - 6pm (L-V)</td>
+                    <td>< 4 horas</td>
+                </tr>
+                <tr>
+                    <td><strong>NIVEL 2</strong><br>Soporte Avanzado</td>
+                    <td>24/7 para críticos</td>
+                    <td>< 1 hora</td>
+                </tr>
+                <tr>
+                    <td><strong>NIVEL 3</strong><br>Desarrollo/Urgencias</td>
+                    <td>5 horas/mes garantizadas</td>
+                    <td>< 2 horas críticos</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="container avoid-break">
+        <div class="col-2">
+            <h2>📋 Checklist de Lanzamiento Crítico</h2>
+            
+            <h3>PRE-LANZAMIENTO (72 horas antes)</h3>
+            <div class="card">
+                <div class="checklist-item"><input type="checkbox"> Certificado SSL instalado y funcionando</div>
+                <div class="checklist-item"><input type="checkbox"> Backup completo del sistema</div>
+                <div class="checklist-item"><input type="checkbox"> 5 productos de prueba cargados</div>
+                <div class="checklist-item"><input type="checkbox"> Métodos de pago configurados y probados</div>
+                <div class="checklist-item"><input type="checkbox"> Email de notificaciones funcionando</div>
+                <div class="checklist-item"><input type="checkbox"> Términos y condiciones publicados</div>
+                <div class="checklist-item"><input type="checkbox"> Política de privacidad configurada</div>
+                <div class="checklist-item"><input type="checkbox"> Contacto y soporte visible</div>
+            </div>
+            
+            <h3 class="mt-2">DÍA DE LANZAMIENTO</h3>
+            <div class="card">
+                <div class="checklist-item"><input type="checkbox"> Monitoreo activo cada 2 horas</div>
+                <div class="checklist-item"><input type="checkbox"> Equipo de soporte disponible</div>
+                <div class="checklist-item"><input type="checkbox"> Comunicación a primeros afiliados</div>
+                <div class="checklist-item"><input type="checkbox"> Prueba de compra real completa</div>
+                <div class="checklist-item"><input type="checkbox"> Verificación de comisiones automáticas</div>
+            </div>
+        </div>
+        
+        <div class="col-2">
+            <h3>POST-LANZAMIENTO (primeras 48 horas)</h3>
+            <div class="card">
+                <div class="checklist-item"><input type="checkbox"> Revisar logs de errores del sistema</div>
+                <div class="checklist-item"><input type="checkbox"> Optimizar tiempos de carga página</div>
+                <div class="checklist-item"><input type="checkbox"> Recoger feedback primeros usuarios</div>
+                <div class="checklist-item"><input type="checkbox"> Ajustar procesos según necesidad real</div>
+            </div>
+            
+            <h3 class="mt-2">📎 Documentos Adicionales Necesarios</h3>
+            <div class="card">
+                <div class="checklist-item"><input type="checkbox"> Contrato tipo para afiliados</div>
+                <div class="checklist-item"><input type="checkbox"> Política de devoluciones y garantías</div>
+                <div class="checklist-item"><input type="checkbox"> Manual de afiliado (PDF/Video)</div>
+            
